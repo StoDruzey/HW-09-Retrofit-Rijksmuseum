@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/second_fragment"
-        android:name="com.example.hw09retrofitrijksmuseum.FragmentFirst"
+        android:name="com.example.hw09retrofitrijksmuseum.FragmentSecond"
         tools:layout="@layout/fragment_second">
 
         <argument
