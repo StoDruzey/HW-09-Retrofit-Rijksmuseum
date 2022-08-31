@@ -34,24 +34,32 @@ class FragmentFirst : Fragment() {
             .build()
 
         val rijksmuseumAPI = retrofit.create<RijksmuseumAPI>()
-        rijksmuseumAPI
-            .getArtobject()
-            .enqueue(object : Callback<List<ArtObject>>{
-                override fun onResponse(
-                    call: Call<List<ArtObject>>,
-                    response: Response<List<ArtObject>>
-                ) {
-                    println()
-                }
 
-                override fun onFailure(call: Call<List<ArtObject>>, t: Throwable) {
-                    println()
+        val request = rijksmuseumAPI.getArtObject("ZOavwPKX", "Rembrandt+van+Rijn")
+        request.enqueue(object : Callback<List<ArtObject>>{
+            override fun onResponse(call: Call<List<ArtObject>>, response: Response<List<ArtObject>>) {
+                if (response.isSuccessful) {
+
+                } else {
+                    handleException(HttpException(response))
                 }
-            })
+            }
+
+            override fun onFailure(call: Call<List<ArtObject>>, t: Throwable) {
+                if (!call.isCanceled) {
+                    handleException(t)
+                }
+            }
+        })
+        request.cancel()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun handleException(e: Throwable) {
+
     }
 }
