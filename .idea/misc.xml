@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android studying/HW09RetrofitRijksmuseum/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
         <entry key="..\:/Android studying/HW09RetrofitRijksmuseum/app/src/main/res/layout/fragment_first.xml" value="0.22826086956521738" />
+        <entry key="..\:/Android studying/HW09RetrofitRijksmuseum/app/src/main/res/layout/fragment_second.xml" value="0.22826086956521738" />
       </map>
     </option>
   </component>

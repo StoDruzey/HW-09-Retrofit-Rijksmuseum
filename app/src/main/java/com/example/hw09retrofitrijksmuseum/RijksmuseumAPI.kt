@@ -6,6 +6,6 @@ import retrofit2.http.Query
 
 interface RijksmuseumAPI {
 
-    @GET("api/en/collection?")
+    @GET("api/en/collection")
     fun getArtObject(key: String, involvedMaker: String): Call<List<ArtObject>>
 }
