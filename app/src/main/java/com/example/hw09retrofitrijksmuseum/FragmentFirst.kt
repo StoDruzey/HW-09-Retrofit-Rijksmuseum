@@ -20,7 +20,7 @@ class FragmentFirst : Fragment() {
     private var _binding: FragmentFirstBinding? = null
     private val binding get() = requireNotNull(_binding)
 
-//    private var currentRequest: Call<List<ArtObject>>? = null
+    //    private var currentRequest: Call<List<ArtObject>>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,19 +47,19 @@ class FragmentFirst : Fragment() {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://www.rijksmuseum.nl/")
             .addConverterFactory(GsonConverterFactory.create())
-            .client(okHttpClient)
+//            .client(okHttpClient)
             .build()
 
         val rijksmuseumApi = retrofit.create<RijksmuseumAPI>()
 
         rijksmuseumApi
-            .getArtObject("Rembrandt+van+Rijn")
-            .enqueue(object : Callback<List<ArtObject>> {
-                override fun onResponse(call: Call<List<ArtObject>>, response: Response<List<ArtObject>>) {
+            .getArtObject("Rembrandt van Rijn", 100, "ZOavwPKX")
+            .enqueue(object : Callback<Result> {
+                override fun onResponse(call: Call<Result>, response: Response<Result>) {
                     println()
                 }
 
-                override fun onFailure(call: Call<List<ArtObject>>, t: Throwable) {
+                override fun onFailure(call: Call<Result>, t: Throwable) {
                     println()
                 }
             })
