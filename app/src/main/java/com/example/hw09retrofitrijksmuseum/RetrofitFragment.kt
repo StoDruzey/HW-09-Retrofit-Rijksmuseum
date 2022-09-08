@@ -9,15 +9,15 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import coil.load
-import com.example.hw09retrofitrijksmuseum.databinding.FragmentFirstBinding
+import com.example.hw09retrofitrijksmuseum.databinding.FragmentRetrofitBinding
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 
-class FragmentFirst : Fragment() {
+class RetrofitFragment : Fragment() {
 
-    private var _binding: FragmentFirstBinding? = null
+    private var _binding: FragmentRetrofitBinding? = null
     private val binding get() = requireNotNull(_binding)
 
     //    private var currentRequest: Call<List<ArtObject>>? = null
@@ -27,7 +27,7 @@ class FragmentFirst : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return FragmentFirstBinding.inflate(inflater, container, false)
+        return FragmentRetrofitBinding.inflate(inflater, container, false)
             .also { _binding = it }
             .root
     }
@@ -54,12 +54,12 @@ class FragmentFirst : Fragment() {
 
         rijksmuseumApi
             .getArtObject("Rembrandt van Rijn", 100, "ZOavwPKX")
-            .enqueue(object : Callback<Result> {
-                override fun onResponse(call: Call<Result>, response: Response<Result>) {
+            .enqueue(object : Callback<ArtObject> {
+                override fun onResponse(call: Call<ArtObject>, response: Response<ArtObject>) {
                     println()
                 }
 
-                override fun onFailure(call: Call<Result>, t: Throwable) {
+                override fun onFailure(call: Call<ArtObject>, t: Throwable) {
                     println()
                 }
             })
@@ -86,9 +86,7 @@ class FragmentFirst : Fragment() {
 //            }
 
         with(binding) {
-            button.setOnClickListener {
 
-            }
         }
     }
 

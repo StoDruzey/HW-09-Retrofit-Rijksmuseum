@@ -7,8 +7,8 @@
 
     <fragment
         android:id="@+id/first_fragment"
-        android:name="com.example.hw09retrofitrijksmuseum.FragmentFirst"
-        tools:layout="@layout/fragment_first">
+        android:name="com.example.hw09retrofitrijksmuseum.RetrofitFragment"
+        tools:layout="@layout/fragment_retrofit">
 
         <action
             android:id="@+id/to_second_fragment"
@@ -17,8 +17,8 @@
 
     <fragment
         android:id="@+id/second_fragment"
-        android:name="com.example.hw09retrofitrijksmuseum.FragmentSecond"
-        tools:layout="@layout/fragment_second">
+        android:name="com.example.hw09retrofitrijksmuseum.ArtObjectAdapter"
+        tools:layout="@layout/fragment_recycler">
 
         <argument
             android:name="text"
