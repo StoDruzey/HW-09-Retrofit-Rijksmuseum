@@ -1,28 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/first_fragment">
+    app:startDestination="@id/retrofitFragment">
 
     <fragment
-        android:id="@+id/first_fragment"
+        android:id="@+id/retrofitFragment"
         android:name="com.example.hw09retrofitrijksmuseum.RetrofitFragment"
-        tools:layout="@layout/fragment_retrofit">
-
-        <action
-            android:id="@+id/to_second_fragment"
-            app:destination="@id/second_fragment"/>
-    </fragment>
-
-    <fragment
-        android:id="@+id/second_fragment"
-        android:name="com.example.hw09retrofitrijksmuseum.ArtObjectAdapter"
-        tools:layout="@layout/fragment_recycler">
-
-        <argument
-            android:name="text"
-            app:argType="integer"/>
-    </fragment>
-
+        android:label="RetrofitFragment" />
 </navigation>

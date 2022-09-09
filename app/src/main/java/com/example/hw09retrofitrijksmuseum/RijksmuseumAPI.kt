@@ -11,7 +11,7 @@ interface RijksmuseumAPI {
     fun getArtObject(@Query("involvedMaker") involvedMaker: String,
                      @Query("ps") ps: Int,
                      @Query("key") key: String
-    ): Call<Result>
+    ): Call<ArtObject>
 //@GET("users")
 //fun getArtObject(@Query("since") since: Int, @Query("per_page") perPage: Int): Call<List<ArtObject>>
     //@Query("involvedMaker") involvedMaker: String, @Query("key") key: String

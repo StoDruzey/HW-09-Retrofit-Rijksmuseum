@@ -8,11 +8,12 @@ data class ArtObject(
 
 data class Art(
     val id: String,
+    val title: String,
     val longTitle: String,
-    val webImage: webImage
+    val webImage: WebImage
 )
 
-data class webImage(
+data class WebImage(
     val url: String
 )
 
