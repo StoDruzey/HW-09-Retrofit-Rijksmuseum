@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import coil.load
 import com.example.hw09retrofitrijksmuseum.databinding.FragmentRetrofitBinding
+import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import retrofit2.*
@@ -40,6 +41,8 @@ class RetrofitFragment : Fragment() {
 
         with(binding) {
             recyclerView.adapter = adapter
+            recyclerView.addItemDecoration(
+                MaterialDividerItemDecoration(requireContext(), MaterialDividerItemDecoration.VERTICAL))
         }
 
         val retrofit = Retrofit.Builder()
