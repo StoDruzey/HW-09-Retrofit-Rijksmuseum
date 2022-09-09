@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         app:menu="@menu/menu_toolbar"
         app:navigationIcon="@android:drawable/arrow_up_float"
-        app:title="@string/app_name"/>
+        app:title="@string/toolbar_name"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">HW 09 Retrofit Rijksmuseum</string>
+    <string name="toolbar_name">Rijksmuseum gallery</string>
 </resources>
