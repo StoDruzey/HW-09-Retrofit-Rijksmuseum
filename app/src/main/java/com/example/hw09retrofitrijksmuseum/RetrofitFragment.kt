@@ -11,6 +11,7 @@ import android.widget.SearchView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.hw09retrofitrijksmuseum.databinding.FragmentRetrofitBinding
@@ -25,7 +26,14 @@ class RetrofitFragment : Fragment() {
     private var _binding: FragmentRetrofitBinding? = null
     private val binding get() = requireNotNull(_binding)
 
-    private val adapter by lazy { ArtAdapter(requireContext()) }
+    private val adapter by lazy {
+        ArtAdapter(
+            context = requireContext(),
+            onArtClicked = {
+                findNavController().navigate(RetrofitFragmentDirections.actionRetrofitFragmentToDetailsFragment(it.longTitle))
+            }
+        )
+    }
 
     private var artObjectRequest: Call<ArtObject>? = null
 
@@ -60,21 +68,21 @@ class RetrofitFragment : Fragment() {
 //                MaterialDividerItemDecoration(requireContext(), MaterialDividerItemDecoration.VERTICAL)
             )
 
-            toolbar
-                .menu
-                .findItem(R.id.action_search)
-                .actionView
-                .let { it as SearchView }
-                .setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                    override fun onQueryTextSubmit(query: String): Boolean {
-                        return false
-                    }
-
-                    override fun onQueryTextChange(newText: String): Boolean {
-                        adapter.submitList(currentArtList.filter { it.title.contains(newText) })
-                        return true
-                    }
-                })
+//            toolbar
+//                .menu
+//                .findItem(R.id.action_search)
+//                .actionView
+//                .let { it as SearchView }
+//                .setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//                    override fun onQueryTextSubmit(query: String): Boolean {
+//                        return false
+//                    }
+//
+//                    override fun onQueryTextChange(newText: String): Boolean {
+//                        adapter.submitList(currentArtList.filter { it.title.contains(newText) })
+//                        return true
+//                    }
+//                })
         }
 
             val retrofit = Retrofit.Builder()
@@ -93,7 +101,8 @@ class RetrofitFragment : Fragment() {
                         if (response.isSuccessful) {
                             val artList = response.body()?.artObjects ?: return
                             currentArtList.addAll(artList)
-                            adapter.submitList(artList)
+                            val items = artList.map { PagingData.Item(it) } + PagingData.Loading
+                            adapter.submitList(items)
                         } else {
                             handleException(HttpException(response))
                         }
