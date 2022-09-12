@@ -30,7 +30,9 @@ class RetrofitFragment : Fragment() {
         ArtAdapter(
             context = requireContext(),
             onArtClicked = {
-                findNavController().navigate(RetrofitFragmentDirections.actionRetrofitFragmentToDetailsFragment(it.longTitle))
+                findNavController()
+                    .navigate(RetrofitFragmentDirections
+                        .actionRetrofitFragmentToDetailsFragment(it.longTitle))
             }
         )
     }
@@ -53,6 +55,13 @@ class RetrofitFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with(binding) {
+
+            swipeRefresh.setOnRefreshListener {
+                executeRequest {
+                    swipeRefresh.isRefreshing = false
+                }
+            }
+
             recyclerView.adapter = adapter
             recyclerView.addItemDecoration(
                 object : RecyclerView.ItemDecoration() {
@@ -84,16 +93,26 @@ class RetrofitFragment : Fragment() {
 //                    }
 //                })
         }
+        executeRequest()
+    }
 
-            val retrofit = Retrofit.Builder()
-            .baseUrl("https://www.rijksmuseum.nl/")
-            .addConverterFactory(GsonConverterFactory.create())
-//            .client(okHttpClient)
-            .build()
+    override fun onDestroyView() {
+        super.onDestroyView()
+        artObjectRequest?.cancel()
+        _binding = null
+    }
 
-        val rijksmuseumApi = retrofit.create<RijksmuseumAPI>()
+    private fun executeRequest(
+        onRequestFinished: () -> Unit = {}
+    ) {
 
-        artObjectRequest = rijksmuseumApi
+        val finishRequest = {
+            onRequestFinished()
+            artObjectRequest = null
+        }
+
+        artObjectRequest?.cancel()
+        artObjectRequest = RijksmuseumService.api
             .getArtObject("Rembrandt van Rijn", 100, "ZOavwPKX")
             .apply {
                 enqueue(object : Callback<ArtObject> {
@@ -106,21 +125,17 @@ class RetrofitFragment : Fragment() {
                         } else {
                             handleException(HttpException(response))
                         }
+                        finishRequest()
                     }
 
                     override fun onFailure(call: Call<ArtObject>, t: Throwable) {
                         if (!call.isCanceled) {
                             handleException(t)
                         }
+                        finishRequest()
                     }
                 })
             }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        artObjectRequest?.cancel()
-        _binding = null
     }
 
     private fun handleException(e: Throwable) {

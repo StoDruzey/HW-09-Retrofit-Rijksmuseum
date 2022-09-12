@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">HW 09 Retrofit Rijksmuseum</string>
-    <string name="toolbar_name">Rijksmuseum gallery</string>
+    <string name="main_toolbar_name">Rijksmuseum gallery</string>
+    <string name="details_toolbar_name">Art details</string>
 </resources>

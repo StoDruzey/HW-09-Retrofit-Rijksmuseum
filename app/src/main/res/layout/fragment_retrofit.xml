@@ -13,16 +13,23 @@
         android:layout_height="wrap_content"
         app:menu="@menu/menu_toolbar"
         app:navigationIcon="@android:drawable/arrow_up_float"
-        app:title="@string/toolbar_name"/>
+        app:title="@string/main_toolbar_name"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:padding="16dp"
-        android:clipToPadding="false"
-        tools:itemCount="5"
-        tools:listitem="@layout/item_art"/>
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:padding="16dp"
+            android:clipToPadding="false"
+            tools:itemCount="5"
+            tools:listitem="@layout/item_art"/>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>

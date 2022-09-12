@@ -25,6 +25,7 @@
         <argument
             android:name="long_title"
             app:argType="string"/>
+
     </fragment>
 
 </navigation>
