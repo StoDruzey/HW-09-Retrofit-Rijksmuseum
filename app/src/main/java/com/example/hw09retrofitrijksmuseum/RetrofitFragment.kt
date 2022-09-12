@@ -1,25 +1,16 @@
 package com.example.hw09retrofitrijksmuseum
 
-import android.Manifest
-import android.content.pm.PackageManager
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import com.example.hw09retrofitrijksmuseum.databinding.FragmentRetrofitBinding
-import com.google.android.material.divider.MaterialDividerItemDecoration
-import com.google.gson.Gson
-import okhttp3.OkHttpClient
 import retrofit2.*
-import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitFragment : Fragment() {
 
@@ -32,7 +23,7 @@ class RetrofitFragment : Fragment() {
             onArtClicked = {
                 findNavController()
                     .navigate(RetrofitFragmentDirections
-                        .actionRetrofitFragmentToDetailsFragment(it.longTitle))
+                        .actionRetrofitFragmentToDetailsFragment(it.longTitle, it.webImage.url))
             }
         )
     }
@@ -74,24 +65,7 @@ class RetrofitFragment : Fragment() {
                         outRect.bottom = INTERVAL_BETWEEN_ITEMS
                     }
                 }
-//                MaterialDividerItemDecoration(requireContext(), MaterialDividerItemDecoration.VERTICAL)
             )
-
-//            toolbar
-//                .menu
-//                .findItem(R.id.action_search)
-//                .actionView
-//                .let { it as SearchView }
-//                .setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//                    override fun onQueryTextSubmit(query: String): Boolean {
-//                        return false
-//                    }
-//
-//                    override fun onQueryTextChange(newText: String): Boolean {
-//                        adapter.submitList(currentArtList.filter { it.title.contains(newText) })
-//                        return true
-//                    }
-//                })
         }
         executeRequest()
     }
@@ -145,12 +119,3 @@ class RetrofitFragment : Fragment() {
         val INTERVAL_BETWEEN_ITEMS = 50
     }
 }
-
-//        val okHttpClient = OkHttpClient.Builder()
-//            .addInterceptor { chain ->
-//                val newRequest = chain.request().newBuilder()
-//                    .addHeader("key", "ZOavwPKX")
-//                    .build()
-//                chain.proceed(newRequest)
-//            }
-//            .build()

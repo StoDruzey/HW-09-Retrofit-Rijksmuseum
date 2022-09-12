@@ -25,6 +25,9 @@
         <argument
             android:name="long_title"
             app:argType="string"/>
+        <argument
+            android:name="image_url"
+            app:argType="string"/>
 
     </fragment>
 
